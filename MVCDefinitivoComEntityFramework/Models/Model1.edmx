@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MVCDefinitivoComEntityFrameworModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tb_autor2">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="50" />
+          <Property Name="QtdLivrosEscritos" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tb_livro">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="50" />
+          <Property Name="Categoria" Type="varchar" MaxLength="50" />
+          <Property Name="DataLancamento" Type="date" />
+          <Property Name="AutorLivro" Type="int" />
+        </EntityType>
+        <Association Name="FK_tb_livro_tb_autor2">
+          <End Role="tb_autor2" Type="Self.tb_autor2" Multiplicity="0..1" />
+          <End Role="tb_livro" Type="Self.tb_livro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_autor2">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tb_livro">
+              <PropertyRef Name="AutorLivro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MVCDefinitivoComEntityFrameworModelStoreContainer">
+          <EntitySet Name="tb_autor2" EntityType="Self.tb_autor2" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_livro" EntityType="Self.tb_livro" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tb_livro_tb_autor2" Association="Self.FK_tb_livro_tb_autor2">
+            <End Role="tb_autor2" EntitySet="tb_autor2" />
+            <End Role="tb_livro" EntitySet="tb_livro" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MVCDefinitivoComEntityFrameworModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tb_autor2">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="QtdLivrosEscritos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_livro" Relationship="Self.FK_tb_livro_tb_autor2" FromRole="tb_autor2" ToRole="tb_livro" />
+        </EntityType>
+        <EntityType Name="tb_livro">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Categoria" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DataLancamento" Type="DateTime" Precision="0" />
+          <Property Name="AutorLivro" Type="Int32" />
+          <NavigationProperty Name="tb_autor2" Relationship="Self.FK_tb_livro_tb_autor2" FromRole="tb_livro" ToRole="tb_autor2" />
+        </EntityType>
+        <Association Name="FK_tb_livro_tb_autor2">
+          <End Role="tb_autor2" Type="Self.tb_autor2" Multiplicity="0..1" />
+          <End Role="tb_livro" Type="Self.tb_livro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_autor2">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tb_livro">
+              <PropertyRef Name="AutorLivro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MVCDefinitivoComEntityFrameworEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tb_autor2" EntityType="Self.tb_autor2" />
+          <EntitySet Name="tb_livro" EntityType="Self.tb_livro" />
+          <AssociationSet Name="FK_tb_livro_tb_autor2" Association="Self.FK_tb_livro_tb_autor2">
+            <End Role="tb_autor2" EntitySet="tb_autor2" />
+            <End Role="tb_livro" EntitySet="tb_livro" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MVCDefinitivoComEntityFrameworModelStoreContainer" CdmEntityContainer="MVCDefinitivoComEntityFrameworEntities3">
+          <EntitySetMapping Name="tb_autor2">
+            <EntityTypeMapping TypeName="MVCDefinitivoComEntityFrameworModel.tb_autor2">
+              <MappingFragment StoreEntitySet="tb_autor2">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="QtdLivrosEscritos" ColumnName="QtdLivrosEscritos" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_livro">
+            <EntityTypeMapping TypeName="MVCDefinitivoComEntityFrameworModel.tb_livro">
+              <MappingFragment StoreEntitySet="tb_livro">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+                <ScalarProperty Name="DataLancamento" ColumnName="DataLancamento" />
+                <ScalarProperty Name="AutorLivro" ColumnName="AutorLivro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
